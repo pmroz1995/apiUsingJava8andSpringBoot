@@ -20,6 +20,10 @@ public class Customer {
 
     public Customer(){}
 
+    public static final Customer customer(){
+        return new Customer();
+    }
+
     public Customer(Long id, String customerName, List<Product> products) {
         this.id = id;
         CustomerName = customerName;
