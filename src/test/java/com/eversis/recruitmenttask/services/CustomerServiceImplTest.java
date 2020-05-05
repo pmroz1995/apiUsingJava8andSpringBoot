@@ -28,18 +28,32 @@ public class CustomerServiceImplTest {
     public void setUp(){
         customerRepository.save(
                 customer()
-                    .id(1L)
                     .CustomerName("Piotrek"));
         customerRepository.save(
                 customer()
-                        .id(2L)
                         .CustomerName("Mirek"));
+        customerRepository.save(
+                customer()
+                    .CustomerName("Halina"));
 
     }
 
     @Test
     public void checkIfCustomerAmountReturnProperValue(){
-        assertEquals(2,customerRepository.findAll().size());
+        assertEquals(3,customerRepository.findAll().size());
+    }
+
+    @Test
+    public void checkIfThirdCustomerNameEqualsHalina(){
+        Customer customer = customerRepository.findAll()
+                                .stream()
+                                .filter(e -> e.getCustomerName() == "Halina")
+                                .findAny()
+                                .get();
+        Customer customer1 = customerRepository.findById(3l).get();
+
+        assertEquals("Halina",customer.getCustomerName());
+        assertEquals("Halina",customer1.getCustomerName());
     }
 
 
